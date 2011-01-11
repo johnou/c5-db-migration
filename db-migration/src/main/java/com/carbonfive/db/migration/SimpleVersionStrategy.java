@@ -4,9 +4,16 @@ import com.carbonfive.db.jdbc.DatabaseType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.Date;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 import static com.carbonfive.db.jdbc.DatabaseType.HSQL;
 import static com.carbonfive.db.jdbc.DatabaseType.SQL_SERVER;
