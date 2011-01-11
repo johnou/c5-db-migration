@@ -1,24 +1,28 @@
 package com.carbonfive.db.jdbc.schema;
 
-import com.carbonfive.db.*;
-import static junit.framework.Assert.*;
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assume.*;
-import org.junit.*;
+import com.carbonfive.db.DatabaseTestUtils;
+import org.junit.Ignore;
+import org.junit.Test;
 
-import javax.sql.*;
+import javax.sql.DataSource;
+import java.net.InetAddress;
+
 import static java.lang.String.format;
-import static java.lang.System.*;
-import java.net.*;
+import static java.lang.System.getProperty;
+import static junit.framework.Assert.fail;
+import static org.hamcrest.Matchers.startsWith;
+import static org.junit.Assume.assumeThat;
 
 public class DropDatabaseTest
 {
+    @Ignore
     @Test
     public void dropMysqlDatabase() throws Exception
     {
         dropDatabase(format("jdbc:mysql://%s/drop_database_test", getProperty("jdbc.host", "localhost")));
     }
 
+    @Ignore
     @Test
     public void dropPostgresqlDatabase() throws Exception
     {

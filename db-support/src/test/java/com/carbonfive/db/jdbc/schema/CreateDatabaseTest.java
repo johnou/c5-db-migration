@@ -1,18 +1,21 @@
 package com.carbonfive.db.jdbc.schema;
 
-import com.carbonfive.db.*;
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assume.*;
-import org.junit.*;
+import com.carbonfive.db.DatabaseTestUtils;
+import org.junit.Ignore;
+import org.junit.Test;
 
-import javax.sql.*;
-import static java.lang.String.*;
-import static java.lang.System.*;
-import java.net.*;
-import java.sql.*;
+import javax.sql.DataSource;
+import java.net.InetAddress;
+import java.sql.SQLException;
+
+import static java.lang.String.format;
+import static java.lang.System.getProperty;
+import static org.hamcrest.Matchers.startsWith;
+import static org.junit.Assume.assumeThat;
 
 public class CreateDatabaseTest
 {
+    @Ignore
     @Test
     public void createMysqlDatabase() throws Exception
     {
@@ -20,6 +23,7 @@ public class CreateDatabaseTest
         createDatabase(format("jdbc:mysql://%s/create-database-test", getProperty("jdbc.host", "localhost")));
     }
 
+    @Ignore
     @Test
     public void createPostgresqlDatabase() throws Exception
     {

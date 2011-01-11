@@ -4,6 +4,7 @@ import com.carbonfive.db.jdbc.schema.CreateDatabase;
 import com.carbonfive.db.jdbc.schema.DropDatabase;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.postgresql.Driver;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
@@ -16,6 +17,7 @@ import static java.lang.System.getProperty;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
+@Ignore
 public class PostgreSQLMigrationTest
 {
     private DataSourceMigrationManager migrationManager;

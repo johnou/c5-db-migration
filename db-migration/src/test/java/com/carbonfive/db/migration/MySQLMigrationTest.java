@@ -3,18 +3,21 @@ package com.carbonfive.db.migration;
 import com.carbonfive.db.jdbc.schema.CreateDatabase;
 import com.carbonfive.db.jdbc.schema.DropDatabase;
 import com.mysql.jdbc.Driver;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 import javax.sql.DataSource;
+
 import static java.lang.String.format;
 import static java.lang.System.getProperty;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 
+@Ignore
 public class MySQLMigrationTest
 {
     private DataSourceMigrationManager migrationManager;
