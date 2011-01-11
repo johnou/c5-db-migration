@@ -1,14 +1,12 @@
 package com.carbonfive.db.migration;
 
 import com.carbonfive.db.jdbc.DatabaseType;
-import org.apache.commons.collections.map.DefaultedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static com.carbonfive.db.jdbc.DatabaseType.HSQL;
 import static com.carbonfive.db.jdbc.DatabaseType.SQL_SERVER;
@@ -31,11 +29,12 @@ public class SimpleVersionStrategy implements VersionStrategy
     private String appliedDateColumn = DEFAULT_APPLIED_DATE_COLUMN;
     private String durationColumn = DEFAULT_DURATION_COLUMN;
 
-    private static final DefaultedMap enableVersioningDDL;
+    private static final Map<DatabaseType, String> enableVersioningDDL = new HashMap<DatabaseType, String>();
+
+    private static final String DEFAULT_DDL = "create table %s (%s varchar(32) not null unique, %s timestamp not null, %s int not null)";
 
     static
     {
-        enableVersioningDDL = new DefaultedMap("create table %s (%s varchar(32) not null unique, %s timestamp not null, %s int not null)");
         enableVersioningDDL.put(HSQL, "create table %s (%s varchar not null, %s datetime not null, %s int not null, constraint %2$s_unique unique (%2$s))");
         enableVersioningDDL.put(SQL_SERVER, "create table %s (%s varchar(32) not null unique, %s datetime not null, %s int not null)");
     }
@@ -58,8 +57,13 @@ public class SimpleVersionStrategy implements VersionStrategy
     {
         try
         {
-            String ddl = format((String) enableVersioningDDL.get(dbType), versionTable, versionColumn, appliedDateColumn, durationColumn);
-            connection.createStatement().executeUpdate(ddl);
+            String ddl = enableVersioningDDL.get(dbType);
+            if (ddl == null)
+            {
+                ddl = DEFAULT_DDL;
+            }
+            String query = format(ddl, versionTable, versionColumn, appliedDateColumn, durationColumn);
+            connection.createStatement().executeUpdate(query);
         }
         catch (SQLException e)
         {
